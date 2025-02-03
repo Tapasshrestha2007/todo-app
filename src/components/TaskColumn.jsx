@@ -1,13 +1,16 @@
 import React from "react";
-import todo from "../assets/direct-hit.png";
+
 import "./TaskColumn.css";
-const TaskColumn = () => {
+import TaskCard from "./TaskCard";
+const TaskColumn = (props) => {
   return (
     <section className="task_column">
       <h2 className="task_column_heading">
-        <img src={todo} className="task_column_icon" />
-        To do
+        <img src={props.icon} className="task_column_icon" />
+        {props.name}
       </h2>
+
+      <TaskCard></TaskCard>
     </section>
   );
 };

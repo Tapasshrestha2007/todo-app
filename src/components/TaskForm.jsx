@@ -40,12 +40,14 @@ const Taskform = ({ setTasks }) => {
     setTasks((prev) => {
       return [...prev, taskData];
     });
+    setTaskData({ task: "", status: "todo", tags: [] });
   };
 
   return (
     <header className="app_header">
       <form onSubmit={handleSubmit}>
         <input
+          value={taskData.task}
           name="task"
           type="text"
           className="task_input"
@@ -74,6 +76,7 @@ const Taskform = ({ setTasks }) => {
           </div>
           <div>
             <select
+              value={taskData.status}
               className="task_status"
               onChange={handlechange}
               name="status"

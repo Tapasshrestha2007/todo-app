@@ -8,15 +8,40 @@ import doingicon from "./assets/glowing-star.png";
 import doneicon from "./assets/check-mark-button.png";
 
 const App = () => {
-  const [task, setTask] = useState([]);
-  console.log(task);
+  const [tasks, setTask] = useState([]);
+
+  const handledelete = (taskIndex) => {
+    const filterTasks = tasks.filter((task, index) => index !== taskIndex);
+    setTask(filterTasks);
+  };
+
+  console.log(tasks);
+
   return (
     <div className="app">
       <Taskform setTasks={setTask}></Taskform>
       <main className="app_main">
-        <TaskColumn name="To Do" icon={todoicon} task={task} status="todo" />
-        <TaskColumn name="Doing" icon={doingicon} task={task} status="doing" />
-        <TaskColumn name="Done" icon={doneicon} task={task} status="done" />
+        <TaskColumn
+          name="To Do"
+          handledelete={handledelete}
+          icon={todoicon}
+          tasks={tasks}
+          status="todo"
+        />
+        <TaskColumn
+          name="Doing"
+          icon={doingicon}
+          tasks={tasks}
+          status="doing"
+          handledelete={handledelete}
+        />
+        <TaskColumn
+          name="Done"
+          icon={doneicon}
+          handledelete={handledelete}
+          tasks={tasks}
+          status="done"
+        />
       </main>
     </div>
   );

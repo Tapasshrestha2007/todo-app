@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Taskform from "./components/Taskform";
 import TaskColumn from "./components/TaskColumn";
@@ -8,7 +8,8 @@ import doingicon from "./assets/glowing-star.png";
 import doneicon from "./assets/check-mark-button.png";
 
 const App = () => {
-  const [tasks, setTask] = useState([]);
+  const oldTasks = localStorage.getItem("tasks");
+  const [tasks, setTask] = useState(JSON.parse(oldTasks) || []);
 
   const handledelete = (taskIndex) => {
     const filterTasks = tasks.filter((task, index) => index !== taskIndex);
@@ -16,6 +17,10 @@ const App = () => {
   };
 
   console.log(tasks);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <div className="app">
